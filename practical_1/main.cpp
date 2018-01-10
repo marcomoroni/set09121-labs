@@ -20,6 +20,16 @@ bool server = false;
 CircleShape ball;
 RectangleShape paddles[2];
 
+void Reset() {
+	// reset paddle position
+	paddles[0].setPosition(Vector2f(gameWidth / 2 - 370.f, gameHeight / 2));
+	paddles[1].setPosition(Vector2f(gameWidth / 2 + 370.f, gameHeight / 2));
+	// reset ball position
+	ball.setPosition(Vector2f(gameWidth / 2 - ballRadius / 2, gameHeight / 2 - ballRadius / 2));
+	// reset ball velocity
+	ballVelocity = { server ? 100.f : -100.f, 60.f };
+}
+
 void Load() {
 	// Set size and origin of paddles
 	for (auto &p : paddles) {
@@ -29,13 +39,8 @@ void Load() {
 	// Set size and origin of ball
 	ball.setRadius(ballRadius - 3);
 	ball.setOrigin(ballRadius / 2, ballRadius / 2);
-	// reset paddle position
-	paddles[0].setPosition(Vector2f(gameWidth / 2 - 370.f, gameHeight / 2));
-	paddles[1].setPosition(Vector2f(gameWidth / 2 + 370.f, gameHeight / 2));
-	// reset ball position
-	ball.setPosition(Vector2f(gameWidth / 2 - ballRadius / 2, gameHeight / 2 - ballRadius / 2));
-	// ball velocity
-	ballVelocity = { server ? 100.f : -100.f, 60.f };
+	
+	Reset();
 }
 
 void Update(RenderWindow &window) {
@@ -68,6 +73,56 @@ void Update(RenderWindow &window) {
 
 	// move ball
 	ball.move(ballVelocity * dt);
+
+	// check for ball collision
+	const float bx = ball.getPosition().x;
+	const float by = ball.getPosition().y;
+	if (by > gameHeight) {
+		// bottom wall
+		ballVelocity.x *= 1.1f;
+		ballVelocity.y *= -1.1f;
+		ball.move(0, -10.f);
+	}
+	else if (by < 0) {
+		// top wall
+		ballVelocity.x *= 1.1f;
+		ballVelocity.y *= -1.1f;
+		ball.move(0, -10.f);
+	}
+	else if (bx > gameWidth) {
+		// right wall
+		Reset();
+	}
+	else if (bx < 0) {
+		// left wall
+		Reset();
+	}
+	else if (
+		// ball is inline or behind paddle
+		bx < paddleSize.x &&
+		// AND ball is below top edge of paddle
+		by > paddles[0].getPosition().y - (paddleSize.y * 0.5f) &&
+		// AND ball is above bottom edge of paddle
+		by < paddles[0].getPosition().y - (paddleSize.y * 0.5f)
+		) {
+		// left paddle
+		ballVelocity.x *= -1.1f;
+		ballVelocity.y *= 1.1f;
+		ball.move(0, -10.f);
+	}
+	else if (
+		// ball is inline or behind paddle
+		bx < paddleSize.x &&
+		// AND ball is below top edge of paddle
+		by > paddles[0].getPosition().y + (paddleSize.y * 0.5f) &&
+		// AND ball is above bottom edge of paddle
+		by < paddles[0].getPosition().y + (paddleSize.y * 0.5f)
+		) {
+		// right paddle
+		ballVelocity.x *= -1.1f;
+		ballVelocity.y *= 1.1f;
+		ball.move(0, -10.f);
+	}
 }
 
 void Render(RenderWindow &window) {
