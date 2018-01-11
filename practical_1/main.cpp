@@ -22,8 +22,8 @@ RectangleShape paddles[2];
 
 void Reset() {
 	// reset paddle position
-	paddles[0].setPosition(Vector2f(gameWidth / 2 - 370.f, gameHeight / 2));
-	paddles[1].setPosition(Vector2f(gameWidth / 2 + 370.f, gameHeight / 2));
+	paddles[0].setPosition(Vector2f(0 + paddleSize.x / 2.f, gameHeight / 2));
+	paddles[1].setPosition(Vector2f(gameWidth - paddleSize.x / 2.f, gameHeight / 2));
 	// reset ball position
 	ball.setPosition(Vector2f(gameWidth / 2 - ballRadius / 2, gameHeight / 2 - ballRadius / 2));
 	// reset ball velocity
@@ -33,11 +33,11 @@ void Reset() {
 void Load() {
 	// Set size and origin of paddles
 	for (auto &p : paddles) {
-		p.setSize(paddleSize - Vector2f(3.f, 3.f));
+		p.setSize(paddleSize);
 		p.setOrigin(paddleSize / 2.f);
 	}
 	// Set size and origin of ball
-	ball.setRadius(ballRadius - 3);
+	ball.setRadius(ballRadius);
 	ball.setOrigin(ballRadius / 2, ballRadius / 2);
 	
 	Reset();
@@ -87,7 +87,7 @@ void Update(RenderWindow &window) {
 		// top wall
 		ballVelocity.x *= 1.1f;
 		ballVelocity.y *= -1.1f;
-		ball.move(0, -10.f);
+		ball.move(0, 10.f);
 	}
 	else if (bx > gameWidth) {
 		// right wall
@@ -103,25 +103,25 @@ void Update(RenderWindow &window) {
 		// AND ball is below top edge of paddle
 		by > paddles[0].getPosition().y - (paddleSize.y * 0.5f) &&
 		// AND ball is above bottom edge of paddle
-		by < paddles[0].getPosition().y - (paddleSize.y * 0.5f)
+		by < paddles[0].getPosition().y + (paddleSize.y * 0.5f)
 		) {
 		// left paddle
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
-		ball.move(0, -10.f);
+		ball.move(10.f, 0);
 	}
 	else if (
 		// ball is inline or behind paddle
-		bx < paddleSize.x &&
+		bx > gameWidth - paddleSize.x &&
 		// AND ball is below top edge of paddle
-		by > paddles[0].getPosition().y + (paddleSize.y * 0.5f) &&
+		by > paddles[0].getPosition().y - (paddleSize.y * 0.5f) &&
 		// AND ball is above bottom edge of paddle
 		by < paddles[0].getPosition().y + (paddleSize.y * 0.5f)
 		) {
 		// right paddle
 		ballVelocity.x *= -1.1f;
 		ballVelocity.y *= 1.1f;
-		ball.move(0, -10.f);
+		ball.move(-10.f, 0);
 	}
 }
 
