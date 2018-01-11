@@ -16,9 +16,23 @@ const int gameHeight = 600;
 const float paddleSpeed = 400.f;
 Vector2f ballVelocity;
 bool server = false;
+bool player1isAI = false;
+bool player2isAI = true;
 
 CircleShape ball;
 RectangleShape paddles[2];
+
+float AIDirection(RectangleShape &paddle, CircleShape &ball) {
+	if (paddle.getPosition().y < ball.getPosition().y) {
+		// if paddle is below ball
+		return 1.f;
+	}
+	else if (paddle.getPosition().y > ball.getPosition().y) {
+		// if paddle is above ball
+		return -1.f;
+	}
+	return 0;
+}
 
 void Reset() {
 	// reset paddle position
@@ -27,7 +41,7 @@ void Reset() {
 	// reset ball position
 	ball.setPosition(Vector2f(gameWidth / 2 - ballRadius / 2, gameHeight / 2 - ballRadius / 2));
 	// reset ball velocity
-	ballVelocity = { server ? 100.f : -100.f, 60.f };
+	ballVelocity = { server ? 200.f : -200.f, 120.f };
 }
 
 void Load() {
@@ -63,19 +77,31 @@ void Update(RenderWindow &window) {
 
 	// Handle paddle movement
 	float directionP1 = 0.0f;
-	if (Keyboard::isKeyPressed(controls[0])) {
-		directionP1--;
+	if (!player1isAI)
+	{
+		if (Keyboard::isKeyPressed(controls[0])) {
+			directionP1--;
+		}
+		if (Keyboard::isKeyPressed(controls[1])) {
+			directionP1++;
+		}
 	}
-	if (Keyboard::isKeyPressed(controls[1])) {
-		directionP1++;
+	else {
+		directionP1 = directionP1 + AIDirection(paddles[0], ball);
 	}
 	paddles[0].move(0, directionP1 * paddleSpeed * dt);
 	float directionP2 = 0.0f;
-	if (Keyboard::isKeyPressed(controls[2])) {
-		directionP2--;
+	if (!player2isAI)
+	{
+		if (Keyboard::isKeyPressed(controls[2])) {
+			directionP2--;
+		}
+		if (Keyboard::isKeyPressed(controls[3])) {
+			directionP2++;
+		}
 	}
-	if (Keyboard::isKeyPressed(controls[3])) {
-		directionP2++;
+	else {
+		directionP2 = directionP2 + AIDirection(paddles[1], ball);
 	}
 	paddles[1].move(0, directionP2 * paddleSpeed * dt);
 
