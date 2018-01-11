@@ -62,14 +62,22 @@ void Update(RenderWindow &window) {
 	}
 
 	// Handle paddle movement
-	float direction = 0.0f;
+	float directionP1 = 0.0f;
 	if (Keyboard::isKeyPressed(controls[0])) {
-		direction--;
+		directionP1--;
 	}
 	if (Keyboard::isKeyPressed(controls[1])) {
-		direction++;
+		directionP1++;
 	}
-	paddles[0].move(0, direction * paddleSpeed * dt);
+	paddles[0].move(0, directionP1 * paddleSpeed * dt);
+	float directionP2 = 0.0f;
+	if (Keyboard::isKeyPressed(controls[2])) {
+		directionP2--;
+	}
+	if (Keyboard::isKeyPressed(controls[3])) {
+		directionP2++;
+	}
+	paddles[1].move(0, directionP2 * paddleSpeed * dt);
 
 	// move ball
 	ball.move(ballVelocity * dt);
@@ -114,9 +122,9 @@ void Update(RenderWindow &window) {
 		// ball is inline or behind paddle
 		bx > gameWidth - paddleSize.x &&
 		// AND ball is below top edge of paddle
-		by > paddles[0].getPosition().y - (paddleSize.y * 0.5f) &&
+		by > paddles[1].getPosition().y - (paddleSize.y * 0.5f) &&
 		// AND ball is above bottom edge of paddle
-		by < paddles[0].getPosition().y + (paddleSize.y * 0.5f)
+		by < paddles[1].getPosition().y + (paddleSize.y * 0.5f)
 		) {
 		// right paddle
 		ballVelocity.x *= -1.1f;
