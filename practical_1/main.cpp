@@ -18,6 +18,9 @@ Vector2f ballVelocity;
 bool server = false;
 bool player1isAI = false;
 bool player2isAI = true;
+Font font;
+Text text;
+int score[2] = { 0, 0 };
 
 CircleShape ball;
 RectangleShape paddles[2];
@@ -42,9 +45,20 @@ void Reset() {
 	ball.setPosition(Vector2f(gameWidth / 2 - ballRadius / 2, gameHeight / 2 - ballRadius / 2));
 	// reset ball velocity
 	ballVelocity = { server ? 200.f : -200.f, 120.f };
+
+	// Update score text
+	text.setString(to_string(score[0]) + " : " + to_string(score[1]));
+	// Keep score text centered
+	text.setPosition((gameWidth * 0.5f) - (text.getLocalBounds().width * 0.5f), 0);
 }
 
 void Load() {
+	// Load font-face from res dir
+	font.loadFromFile("res/fonts/RobotoMono-Regular.ttf");
+	// Set text element to use font
+	text.setFont(font);
+	// Set the character size to 24 pixels
+	text.setCharacterSize(24);
 	// Set size and origin of paddles
 	for (auto &p : paddles) {
 		p.setSize(paddleSize);
@@ -125,10 +139,12 @@ void Update(RenderWindow &window) {
 	}
 	else if (bx > gameWidth) {
 		// right wall
+		score[0]++;
 		Reset();
 	}
 	else if (bx < 0) {
 		// left wall
+		score[1]++;
 		Reset();
 	}
 	else if (
@@ -164,6 +180,7 @@ void Render(RenderWindow &window) {
 	window.draw(paddles[0]);
 	window.draw(paddles[1]);
 	window.draw(ball);
+	window.draw(text);
 }
 
 int main() {
