@@ -16,9 +16,11 @@ void Reset() {
 }
 
 void Load() {
+	// Load spritesheet
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet." << endl;
 	}
+	// Create one invader
 	Invader* inv = new Invader(IntRect(0, 0, 32, 32), { 100,100 });
 	ships.push_back(inv);
 
