@@ -9,12 +9,20 @@ using namespace std;
 Texture spritesheet;
 std::vector<Ship *> ships;
 
+void Reset() {
+	// reset invaders movement
+	Invader::direction = true;
+	Invader::speed = 10.f;
+}
+
 void Load() {
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet." << endl;
 	}
 	Invader* inv = new Invader(IntRect(0, 0, 32, 32), { 100,100 });
 	ships.push_back(inv);
+
+	Reset();
 }
 
 void Update(RenderWindow &window) {
