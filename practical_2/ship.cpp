@@ -28,3 +28,8 @@ Invader::Invader(sf::IntRect ir, sf::Vector2f pos) : Ship(ir) {
 void Invader::Update(const float &dt) {
 	Ship::Update(dt);
 }
+
+// Remember: Any decelared STATIC variable must be defined somewhere
+// Then, these variables can be accessed anywhere with `invader::speed = 20.f`
+bool Invader::direction;
+float Invader::speed;
