@@ -48,7 +48,7 @@ void Render(RenderWindow &window) {
 }
 
 int main() {
-	RenderWindow window(VideoMode(200, 200), "SPACE INVADERS");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "SPACE INVADERS");
 	Load();
 	while (window.isOpen()) {
 		window.clear();
