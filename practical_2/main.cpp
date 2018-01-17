@@ -13,6 +13,7 @@ void Reset() {
 	// reset invaders movement
 	Invader::direction = true;
 	Invader::speed = 30.f;
+	Player::speed = 160.f;
 }
 
 void Load() {
@@ -32,6 +33,9 @@ void Load() {
 			ships.push_back(inv);
 		}
 	}
+	// Player
+	auto player = new Player();
+	ships.push_back(player);
 
 	Reset();
 }
