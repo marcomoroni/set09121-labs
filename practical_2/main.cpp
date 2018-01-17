@@ -30,6 +30,11 @@ void Update(RenderWindow &window) {
 			return;
 		}
 	}
+
+	// Quit via ESC Key
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+		window.close();
+	}
 }
 
 void Render(RenderWindow &window) {
