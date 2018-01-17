@@ -12,7 +12,7 @@ std::vector<Ship *> ships;
 void Reset() {
 	// reset invaders movement
 	Invader::direction = true;
-	Invader::speed = 10.f;
+	Invader::speed = 30.f;
 }
 
 void Load() {
@@ -20,9 +20,18 @@ void Load() {
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
 		cerr << "Failed to load spritesheet." << endl;
 	}
-	// Create one invader
-	Invader* inv = new Invader(IntRect(0, 0, 32, 32), { 100,100 });
-	ships.push_back(inv);
+	// Invaders
+	for (int r = 0; r < invaders_rows; ++r) {
+		// Note: IntRect(left, top, width, height)
+		auto rect = IntRect(32 * r, 0, 32, 32);
+		for (int c = 0; c < invaders_columns; ++c) {
+			float leftMargin = gameWidth / 2 - 32 * invaders_columns / 2;
+			float topMargin = 64.f;
+			Vector2f position = { leftMargin + 32.f * c + 16.f, topMargin + 32.f * r + 16.f};
+			auto inv = new Invader(rect, position);
+			ships.push_back(inv);
+		}
+	}
 
 	Reset();
 }
