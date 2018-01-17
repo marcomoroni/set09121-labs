@@ -19,6 +19,17 @@ void Load() {
 }
 
 void Update(RenderWindow &window) {
+	// Reset clock, recalculate deltatime
+	static Clock clock;
+	float dt = clock.restart().asSeconds();
+	// Check and consume events
+	Event event;
+	while (window.pollEvent(event)) {
+		if (event.type == Event::Closed) {
+			window.close();
+			return;
+		}
+	}
 }
 
 void Render(RenderWindow &window) {
