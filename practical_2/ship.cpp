@@ -45,7 +45,7 @@ bool Invader::direction;
 float Invader::speed;
 
 Player::Player() : Ship(IntRect(160, 32, 32, 32)) {
-	setPosition({ gameWidth * .5f - 16.f, gameHeight - 32.f });
+	setPosition({ gameWidth * .5f, gameHeight - 32.f });
 }
 
 void Player::Update(const float &dt) {

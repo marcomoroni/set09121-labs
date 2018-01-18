@@ -28,7 +28,7 @@ void Load() {
 		for (int c = 0; c < invaders_columns; ++c) {
 			float leftMargin = gameWidth / 2 - 32 * invaders_columns / 2;
 			float topMargin = 64.f;
-			Vector2f position = { leftMargin + 32.f * c + 16.f, topMargin + 32.f * r + 16.f};
+			Vector2f position = { leftMargin + 32.f * c, topMargin + 32.f * r};
 			auto inv = new Invader(rect, position);
 			ships.push_back(inv);
 		}
