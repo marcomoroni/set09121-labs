@@ -72,8 +72,11 @@ void Player::Update(const float &dt) {
 	}
 	ships[60]->move(direction * speed * dt, 0);
 	// Bullets
-	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+	static float firetime = 0.f;
+	firetime -= dt;
+	if (firetime <= 0 && Keyboard::isKeyPressed(Keyboard::Space)) {
 		Bullet::Fire(getPosition(), false);
+		firetime = 0.7f;
 	}
 }
 
