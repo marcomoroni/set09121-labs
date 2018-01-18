@@ -7,6 +7,7 @@ protected:
 	// Default constructor is hidden
 	Ship();	
 	bool _exploded;
+	float _explosiontime = 0.2f;
 public:
 	// Constructor that takes a sprite
 	explicit Ship(sf::IntRect ir);

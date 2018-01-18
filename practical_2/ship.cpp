@@ -14,7 +14,15 @@ Ship::Ship(IntRect ir) : Sprite() {
 	_exploded = false;
 };
 
-void Ship::Update(const float &dt) {}
+void Ship::Update(const float &dt) {
+	// "Destroy" ship by making it transparent
+	if (_exploded) {
+		_explosiontime -= dt;
+	}
+	if (_explosiontime <= 0.f) {
+		setColor(Color(0, 0, 0, 0));
+	}
+}
 
 void Ship::Explode() {
 	setTextureRect(IntRect(128, 32, 32, 32));
