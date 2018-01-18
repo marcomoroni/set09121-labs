@@ -8,7 +8,13 @@ Bullet::Bullet(const sf::Vector2f &pos, const bool mode) : Sprite() {
 	setPosition(pos);
 	_mode = mode;
 	setTexture(spritesheet);
-	setTextureRect(IntRect(64, 32, 32, 32));
+	// Set correct texture
+	if (_mode) {
+		setTextureRect(IntRect(32, 32, 32, 32));
+	}
+	else {
+		setTextureRect(IntRect(64, 32, 32, 32));
+	}
 };
 
 Bullet::Bullet() : Sprite() {
