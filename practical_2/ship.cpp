@@ -60,7 +60,7 @@ void Invader::Update(const float &dt) {
 	// (each invader is not able to fire more than once in 4 seconds)
 	static float firetime = 0.f;
 	firetime -= dt;
-	if (firetime <= 0 && rand() % 100 == 0) {
+	if (firetime <= 0 && rand() % 100 == 0 && !_exploded) {
 		Bullet::Fire(getPosition(), true);
 		firetime = 4.f + (rand() % 60);
 	}
