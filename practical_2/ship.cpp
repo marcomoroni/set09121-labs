@@ -48,6 +48,14 @@ void Invader::Update(const float &dt) {
 			ships[i]->move(0, 24);
 		}
 	}
+	// Fire bullets
+	// (each invader is not able to fire more than once in 4 seconds)
+	static float firetime = 0.f;
+	firetime -= dt;
+	if (firetime <= 0 && rand() % 100 == 0) {
+		Bullet::Fire(getPosition(), true);
+		firetime = 4.f + (rand() % 60);
+	}
 }
 
 // Remember: Any decelared STATIC variable must be defined somewhere
