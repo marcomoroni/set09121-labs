@@ -2,12 +2,14 @@
 #include <iostream>
 #include "ship.h"
 #include "game.h"
+#include "bullet.h"
 
 using namespace sf;
 using namespace std;
 
 Texture spritesheet;
 std::vector<Ship *> ships;
+Ship* playerShip;
 
 void Reset() {
 	// reset invaders movement
@@ -35,7 +37,10 @@ void Load() {
 	}
 	// Player
 	auto player = new Player();
+	playerShip = player;
 	ships.push_back(player);
+	// Bullets
+	// ...?
 
 	Reset();
 }
@@ -62,12 +67,16 @@ void Update(RenderWindow &window) {
 	for (auto &s : ships) {
 		s->Update(dt);
 	}
+
+	// Bullets
+	Bullet::Update(dt);
 }
 
 void Render(RenderWindow &window) {
 	for (auto &s : ships) {
 		window.draw(*s);
 	}
+	Bullet::Render(window);
 }
 
 int main() {

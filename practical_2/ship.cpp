@@ -1,5 +1,6 @@
 #include "ship.h"
 #include "game.h"
+#include "bullet.h"
 
 using namespace sf;
 using namespace std;
@@ -10,13 +11,23 @@ Ship::Ship(IntRect ir) : Sprite() {
 	_sprite = ir;
 	setTexture(spritesheet);
 	setTextureRect(_sprite);
+	_exploded = false;
 };
 
 void Ship::Update(const float &dt) {}
 
+void Ship::Explode() {
+	setTextureRect(IntRect(128, 32, 32, 32));
+	_exploded = true;
+}
+
 // Define the ship deconstructor
 // Although we set this to pure virtual, we still have to define it
 Ship::~Ship() = default;
+
+bool Ship::isExploded() const {
+	return _exploded;
+}
 
 Invader::Invader() : Ship() {}
 
@@ -59,6 +70,10 @@ void Player::Update(const float &dt) {
 		direction++;
 	}
 	ships[60]->move(direction * speed * dt, 0);
+	// Bullets
+	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+		Bullet::Fire(getPosition(), false);
+	}
 }
 
 float Player::speed;
