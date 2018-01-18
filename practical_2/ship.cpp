@@ -66,6 +66,11 @@ void Invader::Update(const float &dt) {
 	}
 }
 
+void Invader::Explode() {
+	Ship::Explode();
+	setTextureRect(IntRect(128, 32, 32, 32));
+}
+
 // Remember: Any decelared STATIC variable must be defined somewhere
 // Then, these variables can be accessed anywhere with `invader::speed = 20.f`
 bool Invader::direction;
@@ -97,3 +102,8 @@ void Player::Update(const float &dt) {
 }
 
 float Player::speed;
+
+void Player::Explode() {
+	Ship::Explode();
+	setTextureRect(IntRect(0, 32, 32, 32));
+}
