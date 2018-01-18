@@ -56,6 +56,7 @@ bool Invader::direction;
 float Invader::speed;
 
 Player::Player() : Ship(IntRect(160, 32, 32, 32)) {
+	setOrigin(16, 16);
 	setPosition({ gameWidth * .5f, gameHeight - 32.f });
 }
 
