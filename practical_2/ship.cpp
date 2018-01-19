@@ -25,7 +25,6 @@ void Ship::Update(const float &dt) {
 }
 
 void Ship::Explode() {
-	setTextureRect(IntRect(128, 32, 32, 32));
 	_exploded = true;
 }
 
