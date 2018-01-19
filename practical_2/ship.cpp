@@ -86,10 +86,12 @@ void Player::Update(const float &dt) {
 	// Movement
 	float direction = 0.0f;
 	if (Keyboard::isKeyPressed(Keyboard::Left)) {
-		direction--;
+		if (getPosition().x - 16 > 0)
+			direction--;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Right)) {
-		direction++;
+		if (getPosition().x + 16 < gameWidth)
+			direction++;
 	}
 	ships[60]->move(direction * speed * dt, 0);
 	// Bullets
