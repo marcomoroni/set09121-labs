@@ -3,11 +3,9 @@
 using namespace sf;
 using namespace std;
 
-Bullet::Bullet(const sf::Vector2f &pos, const bool mode) : Sprite() {
-	setOrigin(16, 16);
+Bullet::Bullet(const sf::Vector2f &pos, const bool mode) : Bullet() {	
 	setPosition(pos);
 	_mode = mode;
-	setTexture(spritesheet);
 	// Set correct texture
 	if (_mode) {
 		setTextureRect(IntRect(32, 32, 32, 32));
@@ -18,6 +16,8 @@ Bullet::Bullet(const sf::Vector2f &pos, const bool mode) : Sprite() {
 };
 
 Bullet::Bullet() : Sprite() {
+	setOrigin(16, 16);
+	setTexture(spritesheet);
 };
 
 unsigned char Bullet::bulletPointer = 0;
@@ -31,7 +31,15 @@ void Bullet::Update(const float &dt) {
 }
 
 void Bullet::Fire(const sf::Vector2f &pos, const bool mode) {
-	bullets[++bulletPointer] = Bullet(pos, mode);
+	bullets[++bulletPointer].setPosition(pos);
+	bullets[bulletPointer]._mode = mode;
+	// Set correct texture
+	if (mode) {
+		bullets[bulletPointer].setTextureRect(IntRect(32, 32, 32, 32));
+	}
+	else {
+		bullets[bulletPointer].setTextureRect(IntRect(64, 32, 32, 32));
+	}
 }
 
 void Bullet::Render(sf::RenderWindow &window) {

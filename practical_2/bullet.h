@@ -6,6 +6,7 @@ public:
 	// Update ALL bullets
 	static void Update(const float &dt);
 	// Constructor
+	// (we never use this)
 	Bullet(const sf::Vector2f &pos, const bool mode);
 	// Render ALL bullets
 	static void Render(sf::RenderWindow &window);
