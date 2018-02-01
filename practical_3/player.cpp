@@ -3,21 +3,22 @@
 using namespace sf;
 using namespace std;
 
-void Player::update(double dt) {
+void Player::update(float dt) {
 	// Movement
 	sf::Vector2f displacement = { 0.0f, 0.0f };
 	if (Keyboard::isKeyPressed(Keyboard::Left)) {
-		displacement.x -= 1.0f;
+		displacement.x --;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Right)) {
-		displacement.x += 1.0f;
+		displacement.x ++;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Up)) {
-		displacement.y += 1.0f;
+		displacement.y --;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Down)) {
-		displacement.y -= 1.0f;
+		displacement.y ++;
 	}
+	move((float)dt * displacement * _speed);
 
 	Entity::update(dt);
 }

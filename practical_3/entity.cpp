@@ -8,7 +8,7 @@ void Entity::setPosition(const Vector2f &pos) { _position = pos; }
 
 void Entity::move(const Vector2f &pos) { _position += pos; }
 
-void Entity::update(const double dt) {
+void Entity::update(const float dt) {
 	_shape->setPosition(_position);
 }
 

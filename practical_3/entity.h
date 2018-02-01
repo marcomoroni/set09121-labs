@@ -13,7 +13,7 @@ public:
 	Entity() = delete;
 	virtual ~Entity() = default;
 
-	virtual void update(const double dt);
+	virtual void update(const float dt);
 	virtual void render(sf::RenderWindow &window) const = 0;
 
 	const sf::Vector2f getPosition();
