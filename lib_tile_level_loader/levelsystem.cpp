@@ -25,5 +25,5 @@ sf::Color LevelSystem::getColor(LevelSystem::TILE t) {
 }
 
 void LevelSystem::setColor(LevelSystem::TILE t, sf::Color c) {
-	// ...
+	LevelSystem::_colours[t] = c;
 }
