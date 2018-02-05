@@ -92,3 +92,16 @@ void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
 		buildSprites();
 	}
 }
+
+void LevelSystem::buildSprites() {
+	_sprites.clear();
+	for (size_t y = 0; y < LevelSystem::_height; ++y) {
+		for (size_t x = 0; x < LevelSystem::_width; ++x) {
+			auto s = make_unique<sf::RectangleShape>();
+			s->setPosition(getTilePosition({ x, y }));
+			s->setSize(Vector2f(_tileSize, _tileSize));
+			s->setFillColor(getColor(getTile({ x, y })));
+			_sprites.push_back(move(s));
+		}
+	}
+}
