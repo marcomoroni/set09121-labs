@@ -124,3 +124,9 @@ LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
 	}
 	return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }
+
+void LevelSystem::render(RenderWindow &window) {
+	for (size_t i = 0; i < _width * _height; ++i) {
+		window.draw(*_sprites[i]);
+	}
+}
