@@ -105,3 +105,7 @@ void LevelSystem::buildSprites() {
 		}
 	}
 }
+
+sf::Vector2f LevelSystem::getTilePosition(sf::Vector2ul p) {
+	return (Vector2f(p.x, p.y) * _tileSize);
+}
