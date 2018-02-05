@@ -1,5 +1,6 @@
 #include "levelsystem.h"
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 using namespace sf;
@@ -26,4 +27,68 @@ sf::Color LevelSystem::getColor(LevelSystem::TILE t) {
 
 void LevelSystem::setColor(LevelSystem::TILE t, sf::Color c) {
 	LevelSystem::_colours[t] = c;
+}
+
+void LevelSystem::loadLevelFile(const std::string &path, float tileSize) {
+	_tileSize = tileSize;
+	size_t w = 0, h = 0;
+	string buffer;
+
+	// Load in file to buffer
+	ifstream f(path);
+	if (f.good()) {
+		f.seekg(0, std::ios::end);
+		buffer.resize(f.tellg());
+		f.seekg(0);
+		f.read(&buffer[0], buffer.size());
+		f.close();
+	}
+	else {
+		throw string("Couldn't open level file: ") + path;
+	}
+
+	std::vector<TILE> temp_tiles;
+	for (int i = 0; i < buffer.size(); ++i) {
+		const char c = buffer[i];
+		switch (c) {
+		case 'w':
+			temp_tiles.push_back(START);
+			break;
+		case 's':
+			temp_tiles.push_back(WALL);
+			break;
+		case 'e':
+			temp_tiles.push_back(END);
+			break;
+		case ' ':
+			temp_tiles.push_back(EMPTY);
+			break;
+		case '+':
+			temp_tiles.push_back(WAYPOINT);
+			break;
+		case 'n':
+			temp_tiles.push_back(ENEMY);
+			break;
+		case '\n': // end of line
+			if (w == 0) { // if we haven't written width yet
+				w = i; // set width
+			}
+			h++; // increment height
+			break;
+		default:
+			cout << c << endl; // don't know what this tile type is
+		}
+		if (temp_tiles.size() != (w * h)) {
+			// something went wrong
+			throw string("Can't parse level file ") + path;
+		}
+
+		// Now we now how big the level is, make an array
+		_tiles = std::make_unique<TILE[]>(w * h);
+		_width = w; // set static class vars
+		_height = h;
+		std::copy(temp_tiles.begin(), temp_tiles.end(), &_tiles[0]);
+		cout << "Level " << path << " loaded. " << w << "x" << h << std::endl;
+		buildSprites();
+	}
 }
