@@ -3,6 +3,7 @@
 #include "game.h"
 #include "entity.h"
 #include "player.h"
+#include "levelsystem.h"
 
 using namespace sf;
 using namespace std;
@@ -17,6 +18,19 @@ void Load() {
 	// Player
 	player = new Player();
 	entities.push_back(player);
+
+	// Level
+	ls::loadLevelFile("res/maze_2.txt");
+
+	// Print level to the console
+	cout << "// Printing level ///" << endl;
+	for (size_t y = 0; y < ls::getHeight(); ++y) {
+		for (size_t x = 0; x < ls::getWidth(); ++x) {
+			cout << ls::getTile({ static_cast<float>(x), static_cast<float>(y) });
+		}
+		cout << endl;
+	}
+	cout << "/////////////////////" << endl;
 
 	Reset();
 }
@@ -45,6 +59,7 @@ void Update(RenderWindow &window) {
 }
 
 void Render(RenderWindow &window) {
+	ls::render(window);
 	for (auto &e : entities) {
 		e->render(window);
 	}
