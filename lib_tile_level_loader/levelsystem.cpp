@@ -118,11 +118,11 @@ LevelSystem::TILE LevelSystem::getTile(sf::Vector2f p) {  // Vector2ul
 }
 
 LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
-	auto a = v - _offset;
+	auto a = v /*- _offset*/;
 	if (a.x < 0 || a.y < 0) {
 		throw string("Tile out of range.");
 	}
-	return getTile(Vector2f((v - _offset) / (_tileSize)));  // Vector2ul
+	return getTile(Vector2f((v /*- _offset*/) / (_tileSize)));  // Vector2ul
 }
 
 void LevelSystem::render(RenderWindow &window) {
