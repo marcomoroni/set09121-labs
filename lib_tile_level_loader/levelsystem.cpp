@@ -110,20 +110,20 @@ void LevelSystem::buildSprites() {
 	for (size_t y = 0; y < LevelSystem::_height; ++y) {
 		for (size_t x = 0; x < LevelSystem::_width; ++x) {
 			auto s = make_unique<sf::RectangleShape>();
-			s->setPosition(getTilePosition({ static_cast<float>(x), static_cast<float>(y) }));
+			s->setPosition(getTilePosition({ x, y }));
 			// Note: remember to use `static_cast`, not normal casting
 			s->setSize(Vector2f(_tileSize, _tileSize));
-			s->setFillColor(getColor(getTile({ static_cast<float>(x), static_cast<float>(y) })));
+			s->setFillColor(getColor(getTile({ x, y })));
 			_sprites.push_back(move(s));
 		}
 	}
 }
 
-sf::Vector2f LevelSystem::getTilePosition(sf::Vector2f p) {  // Vector2ul
+sf::Vector2f LevelSystem::getTilePosition(sf::Vector2ul p) {
 	return (Vector2f(p.x, p.y) * _tileSize);
 }
 
-LevelSystem::TILE LevelSystem::getTile(sf::Vector2f p) {  // Vector2ul
+LevelSystem::TILE LevelSystem::getTile(sf::Vector2ul p) {
 	if (p.x > _width || p.y > _height) {
 		throw string("Tile out of range: (") + to_string(p.x) + ", " + to_string(p.y) + ")";
 	}
@@ -135,7 +135,7 @@ LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
 	if (a.x < 0 || a.y < 0) {
 		throw string("Tile out of range.");
 	}
-	return getTile(Vector2f((v /*- _offset*/) / (_tileSize)));  // Vector2ul
+	return getTile(Vector2ul((v /*- _offset*/) / (_tileSize)));
 }
 
 void LevelSystem::render(RenderWindow &window) {

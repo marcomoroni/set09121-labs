@@ -26,7 +26,7 @@ void Load() {
 	cout << "// Printing level ///" << endl;
 	for (size_t y = 0; y < ls::getHeight(); ++y) {
 		for (size_t x = 0; x < ls::getWidth(); ++x) {
-			cout << ls::getTile({ static_cast<float>(x), static_cast<float>(y) });
+			cout << ls::getTile({ x, y });
 		}
 		cout << endl;
 	}

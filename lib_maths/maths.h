@@ -1,9 +1,9 @@
 #pragma once
 
-#define _USE_MATH_DEFINES
+#define M_PI           3.14159265358979323846
 
-#include <SFML/System.hpp>
 #include <cmath>
+#include <SFML/System.hpp>
 #include <iostream>
 #include <vector>
 
@@ -33,7 +33,7 @@ namespace sf {
 		return degrees * M_PI / 180;
 	}
 	// Rotate a sf::vector by an angle (degrees)
-	template <typename T> Vecotr2<T> rotate(const Vector2<T> &v, const double degrees) {
+	template <typename T> Vector2<T> rotate(const Vector2<T> &v, const double degrees) {
 		const double theta = deg2rad(degrees);
 		const double cs = cos(theta);
 		const double sn = sin(theta);
