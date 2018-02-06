@@ -98,9 +98,10 @@ void LevelSystem::buildSprites() {
 	for (size_t y = 0; y < LevelSystem::_height; ++y) {
 		for (size_t x = 0; x < LevelSystem::_width; ++x) {
 			auto s = make_unique<sf::RectangleShape>();
-			s->setPosition(getTilePosition({ x, y }));
+			s->setPosition(getTilePosition({ static_cast<float>(x), static_cast<float>(y) }));
+			// Note: remember to use `static_cast`, not normal casting
 			s->setSize(Vector2f(_tileSize, _tileSize));
-			s->setFillColor(getColor(getTile({ x, y })));
+			s->setFillColor(getColor(getTile({ static_cast<float>(x), static_cast<float>(y) })));
 			_sprites.push_back(move(s));
 		}
 	}
