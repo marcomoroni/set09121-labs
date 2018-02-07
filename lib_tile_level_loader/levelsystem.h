@@ -32,6 +32,8 @@ protected:
 	static float _tileSize;
 	static std::map<TILE, sf::Color> _colours;
 	static std::vector<std::unique_ptr<sf::RectangleShape>> _sprites;
+	// Screenspace offset of level, when rendered
+	static sf::Vector2f _offset;
 
 	static void buildSprites();
 

@@ -11,6 +11,7 @@ size_t LevelSystem::_height;
 
 float LevelSystem::_tileSize(100.f);
 vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
+Vector2f LevelSystem::_offset(0.0f, 30.0f);
 
 size_t LevelSystem::getHeight() {
 	return _height;
@@ -131,11 +132,11 @@ LevelSystem::TILE LevelSystem::getTile(sf::Vector2ul p) {
 }
 
 LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
-	auto a = v /*- _offset*/;
+	auto a = v - _offset;
 	if (a.x < 0 || a.y < 0) {
 		throw string("Tile out of range.");
 	}
-	return getTile(Vector2ul((v /*- _offset*/) / (_tileSize)));
+	return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }
 
 void LevelSystem::render(RenderWindow &window) {
