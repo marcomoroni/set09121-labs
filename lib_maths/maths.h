@@ -17,7 +17,7 @@ namespace sf {
 	// Return normalized sf::vector
 	template <typename T> Vector2<T> normalize(const Vector2<T> &v) {
 		Vector2<T> vector;
-		doule l = length(v);
+		double l = length(v);
 		if (l != 0) {
 			vector.x = v.x / length(v.x);
 			vector.y = v.y / length(v.y);
