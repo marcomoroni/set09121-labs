@@ -3,6 +3,7 @@
 #include "game.h"
 #include "entity.h"
 #include "player.h"
+#include "ghost.h"
 
 using namespace sf;
 using namespace std;
@@ -18,6 +19,12 @@ void Load() {
 	// Player
 	player = new Player();
 	entities.push_back(player);
+
+	// Ghosts
+	for (int i = 0; i < 4; i++) {
+		Ghost* ghost = new Ghost();
+		entities.push_back(ghost);
+	}
 
 	Reset();
 }
