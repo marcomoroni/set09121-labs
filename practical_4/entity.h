@@ -23,6 +23,6 @@ public:
 
 struct EntityManager {
 	std::vector<std::shared_ptr<Entity>> list;
-	void update(double dt);
+	void update(float dt);
 	void render(sf::RenderWindow &window);
 };

@@ -4,6 +4,7 @@
 #include "entity.h"
 #include "player.h"
 #include "ghost.h"
+#include "system_renderer.h"
 
 using namespace sf;
 using namespace std;
@@ -46,19 +47,16 @@ void Update(RenderWindow &window) {
 		window.close();
 	}
 
-	/*for (auto &e : entities) {
-		e->update(dt);
-	}*/
+	em.update(dt);
 }
 
 void Render(RenderWindow &window) {
-	/*for (auto &e : entities) {
-		e->render(window);
-	}*/
+	em.render(window);
 }
 
 int main() {
 	RenderWindow window(VideoMode(gameWidth, gameHeight), "TILE ENGINE");
+	Renderer::initialise(window);
 	Load();
 	while (window.isOpen()) {
 		window.clear();
