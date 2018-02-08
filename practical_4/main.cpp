@@ -8,22 +8,21 @@
 using namespace sf;
 using namespace std;
 
-std::vector<Entity *> entities;
-Player* player;
+EntityManager em;
 
 void Reset() {
-	player->setPosition({ 50.f, 50.f });
+	//player->setPosition({ 50.f, 50.f });
 }
 
 void Load() {
 	// Player
-	player = new Player();
-	entities.push_back(player);
+	shared_ptr<Entity> player = make_shared<Entity>(Player());
+	em.list.push_back(player);
 
 	// Ghosts
 	for (int i = 0; i < 4; i++) {
-		Ghost* ghost = new Ghost();
-		entities.push_back(ghost);
+		shared_ptr<Entity> ghost = make_shared<Entity>(Ghost());
+		em.list.push_back(ghost);
 	}
 
 	Reset();
@@ -47,15 +46,15 @@ void Update(RenderWindow &window) {
 		window.close();
 	}
 
-	for (auto &e : entities) {
+	/*for (auto &e : entities) {
 		e->update(dt);
-	}
+	}*/
 }
 
 void Render(RenderWindow &window) {
-	for (auto &e : entities) {
+	/*for (auto &e : entities) {
 		e->render(window);
-	}
+	}*/
 }
 
 int main() {
