@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "game.h"
+#include "pacman.h"
 #include "entity.h"
 #include "player.h"
 #include "ghost.h"

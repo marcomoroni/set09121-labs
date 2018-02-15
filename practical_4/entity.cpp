@@ -1,5 +1,4 @@
 #include "entity.h"
-#include "system_renderer.h"
 
 using namespace std;
 using namespace sf;
