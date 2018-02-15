@@ -17,12 +17,14 @@ void Reset() {
 
 void Load() {
 	// Player
-	shared_ptr<Entity> player = make_shared<Entity>(Player());
+	shared_ptr<Entity> player = make_shared<Player>();
+	// make_shared<Player>() calls the constructor of Player with no parameters
+	// make_shared<Player>(10) would call a constructor of Player with one parameters of type int
 	em.list.push_back(player);
 
 	// Ghosts
 	for (int i = 0; i < 4; i++) {
-		shared_ptr<Entity> ghost = make_shared<Entity>(Ghost());
+		shared_ptr<Entity> ghost = make_shared<Ghost>();
 		em.list.push_back(ghost);
 	}
 

@@ -7,7 +7,7 @@ namespace Renderer {
 	sf::RenderWindow &getWindow();
 
 	void shutdown();
-	void update(const float &dt);
+	void update(const float &);
 	void queue(const sf::Drawable *s);
 	void render();
 }

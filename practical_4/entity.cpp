@@ -24,6 +24,7 @@ void EntityManager::update(const float dt) {
 
 void EntityManager::render(RenderWindow &window) {
 	for (auto e : list) {
-		Renderer::queue(e);
+		e->render(window);
 	}
+	Renderer::render();
 }
