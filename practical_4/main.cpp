@@ -55,7 +55,7 @@ void Render(RenderWindow &window) {
 }
 
 int main() {
-	RenderWindow window(VideoMode(gameWidth, gameHeight), "TILE ENGINE");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "PACMAN");
 	Renderer::initialise(window);
 	Load();
 	while (window.isOpen()) {
