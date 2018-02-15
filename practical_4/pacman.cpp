@@ -7,11 +7,11 @@ using namespace std;
 using namespace sf;
 
 void MenuScene::update(float dt) {
-	_ents.update(dt);
+	Scene::update(dt);
 }
 
 void MenuScene::render() {
-	_ents.render(Renderer::getWindow());
+	Scene::render();
 }
 
 void MenuScene::load() {
@@ -19,11 +19,11 @@ void MenuScene::load() {
 }
 
 void GameScene::update(float dt) {
-	_ents.update(dt);
+	Scene::update(dt);
 }
 
 void GameScene::render() {
-	_ents.render(Renderer::getWindow());
+	Scene::render();
 }
 
 void GameScene::respawn() {}
