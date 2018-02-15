@@ -25,5 +25,4 @@ void EntityManager::render(RenderWindow &window) {
 	for (auto e : list) {
 		e->render(window);
 	}
-	Renderer::render();
 }
