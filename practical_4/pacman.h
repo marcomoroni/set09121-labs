@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "scene.h"
+#include "ecm.h"
 
 constexpr uint16_t gameWidth = 800;
 constexpr uint16_t gameHeight = 600;

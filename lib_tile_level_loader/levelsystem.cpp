@@ -139,6 +139,16 @@ LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
 	return getTile(Vector2ul((v - _offset) / (_tileSize)));
 }
 
+std::vector<sf::Vector2ul> LevelSystem::findTiles(LevelSystem::TILE tile) {
+	std::vector<sf::Vector2ul> ret;
+	for (auto t : *_tiles) {
+		if (t == tile) {
+			ret.push_back(t);
+		}
+	}
+	return ret;
+}
+
 void LevelSystem::render(RenderWindow &window) {
 	for (size_t i = 0; i < _width * _height; ++i) {
 		window.draw(*_sprites[i]);

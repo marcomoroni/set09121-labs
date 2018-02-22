@@ -22,6 +22,8 @@ public:
 	static sf::Vector2f getTilePosition(sf::Vector2ul);
 	// Get the tile at screenspace position
 	static TILE getTileAt(sf::Vector2f);
+	// Find tile of certain type
+	static std::vector<sf::Vector2ul> findTiles(TILE);
 	static size_t getHeight();
 	static size_t getWidth();
 
