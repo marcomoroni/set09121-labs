@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -26,4 +26,4 @@ struct EntityManager {
 	std::vector<std::shared_ptr<Entity>> list;
 	void update(float dt);
 	void render(sf::RenderWindow &window);
-};
+};*/

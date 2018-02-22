@@ -19,7 +19,7 @@ protected:
 
 public:
 	Entity();
-	virtual ~Entity();
+	virtual ~Entity() = default;
 	virtual void update(float dt);
 	virtual void render();
 
@@ -33,6 +33,20 @@ public:
 	void setForDelete();
 	bool isVisible() const;
 	void setVisible(bool _visible);
+
+	template <typename T, typename... Targs>
+	std::shared_ptr<T> addComponent(Targs... params) {
+		static_assert(std::is_base_of<Component, T>::value, "must be a component");
+		std::shared_ptr<T> sp(std::make_shared<T>(this, params...));
+		_components.push_back(sp);
+		return sp;
+	}
+};
+
+struct EntityManager {
+	std::vector<std::shared_ptr<Entity>> list;
+	void update(float dt);
+	void render();
 };
 
 class Component {
@@ -46,5 +60,5 @@ public:
 	bool is_fordeletion() const;
 	virtual void update(float dt) = 0;
 	virtual void render() = 0;
-	virtual ~Component();
+	virtual ~Component() = default;
 };

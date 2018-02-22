@@ -1,4 +1,4 @@
-#include "entity.h"
+/*#include "entity.h"
 
 using namespace std;
 using namespace sf;
@@ -25,4 +25,4 @@ void EntityManager::render(RenderWindow &window) {
 	for (auto e : list) {
 		e->render(window);
 	}
-}
+}*/

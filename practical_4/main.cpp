@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "pacman.h"
-#include "entity.h"
 #include "system_renderer.h"
 #include "scene.h"
 
@@ -20,7 +19,8 @@ void Load() {
 	gameScene->load();
 	menuScene->load();
 	// Start at main menu
-	activeScene = menuScene;
+	//activeScene = menuScene;
+	activeScene = gameScene; // DEBUG
 }
 
 void Update(RenderWindow &window) {

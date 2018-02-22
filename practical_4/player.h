@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity.h"
+#include "ecm.h"
 
 class Player : public Entity {
 private:
@@ -9,5 +9,5 @@ private:
 public:
 	void update(float dt) override;
 	Player();
-	void render(sf::RenderWindow &window) const override;
+	void render();
 };

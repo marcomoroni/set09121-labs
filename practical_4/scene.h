@@ -1,7 +1,8 @@
 #pragma once
 
-#include "entity.h"
+#include "ecm.h"
 #include <memory>
+#include "system_renderer.h"
 
 class Scene {
 public:

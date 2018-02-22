@@ -11,11 +11,6 @@ void Ghost::update(float dt) {
 	Entity::update(dt);
 }
 
-Ghost::Ghost() : _speed(200.0f), Entity(make_unique<CircleShape>(25.f)) {
-	_shape->setFillColor(Color::Magenta);
-	_shape->setOrigin(Vector2f(25.f, 25.f));
-}
+Ghost::Ghost() {}
 
-void Ghost::render(sf::RenderWindow &window) const {
-	Renderer::queue(_shape.get());
-}
+void Ghost::render() {}
