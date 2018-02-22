@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ecm.h"
+#include <ecm.h>
 #include <SFML/Graphics.hpp>
 
 class ShapeComponent : public Component {
