@@ -1,6 +1,5 @@
 #include "cmp_player_movement.h"
 #include <SFML/Graphics.hpp>
-#include <iostream> // DEBUG
 
 using namespace sf;
 using namespace std;
@@ -9,8 +8,6 @@ PlayerMovementComponent::PlayerMovementComponent(Entity* p)
 	: ActorMovementComponent(p) {}
 
 void PlayerMovementComponent::update(float dt) {
-
-	//cout << "PlayerMovementComponent::update" << endl;
 
 	// Movement
 	sf::Vector2f displacement = { 0.0f, 0.0f };

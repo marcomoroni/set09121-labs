@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "ecm.h"
 
@@ -10,4 +10,4 @@ public:
 	void update(float dt) override;
 	Player();
 	void render();
-};
+};*/

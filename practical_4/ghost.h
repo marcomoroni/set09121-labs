@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 //#include "entity.h"
 #include "ecm.h"
@@ -11,4 +11,4 @@ public:
 	void update(float dt) override;
 	Ghost();
 	void render();
-};
+};*/

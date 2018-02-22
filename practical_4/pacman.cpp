@@ -4,8 +4,9 @@
 #include "cmp_sprite.h"
 #include "cmp_actor_movement.h"
 #include "cmp_player_movement.h"
-#include "player.h"
-#include "ghost.h"
+#include "cmp_enemy_ai.h"
+//#include "player.h"
+//#include "ghost.h"
 
 #define GHOST_COUNT 4
 
@@ -73,6 +74,10 @@ void GameScene::load() {
 		s->setShape<sf::CircleShape>(12.f);
 		s->getShape().setFillColor(ghost_cols[i % 4]);
 		s->getShape().setOrigin({ 12.f, 12.f });
+
+		ghost->addComponent<EnemyAIComponent>();
+
+		ghost->setPosition({ 300.f, 300.f });
 
 		_ents.list.push_back(ghost);
 	}
