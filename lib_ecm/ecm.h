@@ -6,7 +6,7 @@
 #include <typeindex>
 #include <vector>
 
-class Component // forward declare
+class Component; // forward declare
 
 class Entity {
 protected:
@@ -33,4 +33,18 @@ public:
 	void setForDelete();
 	bool isVisible() const;
 	void setVisible(bool _visible);
+};
+
+class Component {
+protected:
+	Entity *const _parent;
+	bool _fordeletion;	// should be removed
+	explicit Component(Entity *const p);
+
+public:
+	Component() = delete;
+	bool is_fordeletion() const;
+	virtual void update(float dt) = 0;
+	virtual void render() = 0;
+	virtual ~Component();
 };
