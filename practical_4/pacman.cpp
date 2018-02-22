@@ -2,6 +2,8 @@
 //#include "entity.h"
 #include "ecm.h"
 #include "cmp_sprite.h"
+#include "cmp_actor_movement.h"
+#include "cmp_player_movement.h"
 #include "player.h"
 #include "ghost.h"
 
@@ -55,6 +57,8 @@ void GameScene::load() {
 		s->getShape().setFillColor(Color::Yellow);
 		s->getShape().setOrigin({ 12.f, 12.f });
 
+		pl->addComponent<PlayerMovementComponent>();
+
 		_ents.list.push_back(pl);
 	}
 
@@ -69,8 +73,6 @@ void GameScene::load() {
 		s->setShape<sf::CircleShape>(12.f);
 		s->getShape().setFillColor(ghost_cols[i % 4]);
 		s->getShape().setOrigin({ 12.f, 12.f });
-
-		ghost->setPosition({ 20.f * i + 1, 20.f * i + 1 }); // DEBUG
 
 		_ents.list.push_back(ghost);
 	}

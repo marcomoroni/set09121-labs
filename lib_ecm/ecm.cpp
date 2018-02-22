@@ -13,23 +13,21 @@ void Entity::setPosition(const Vector2f &pos) { _position = pos; }
 
 void Entity::update(const float dt) {
 	for (auto c : _components) {
-		c->render();
+		c->update(dt);
 	}
 }
 
-void Entity::render() {}
+void Entity::render() {
+	for (auto c : _components) {
+		c->render();
+	}
+}
 
 void EntityManager::update(const float dt) {
 	for (auto e : list) {
 		e->update(dt);
 	}
 }
-
-/*void EntityManager::render(RenderWindow &window) {
-	for (auto e : list) {
-		e->render(window);
-	}
-}*/
 
 void EntityManager::render() {
 	for (auto e : list) {

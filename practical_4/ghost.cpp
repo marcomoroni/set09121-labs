@@ -5,10 +5,10 @@ using namespace sf;
 using namespace std;
 
 void Ghost::update(float dt) {
-	// Movement
+	/*// Movement
 	// ...
 
-	Entity::update(dt);
+	Entity::update(dt);*/
 }
 
 Ghost::Ghost() {}
