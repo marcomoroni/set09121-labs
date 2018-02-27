@@ -11,7 +11,7 @@ size_t LevelSystem::_height;
 
 float LevelSystem::_tileSize(100.f);
 vector<std::unique_ptr<sf::RectangleShape>> LevelSystem::_sprites;
-Vector2f LevelSystem::_offset(0.0f, 30.0f);
+Vector2f LevelSystem::_offset(0.0f, 0.0f);
 
 size_t LevelSystem::getHeight() {
 	return _height;
