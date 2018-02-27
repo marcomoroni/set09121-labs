@@ -52,12 +52,12 @@ void GameScene::render() {
 
 void GameScene::respawn() {
 	player->setPosition(ls::getTilePosition(ls::findTiles(ls::START)[0]));
-	//player->GetCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(150.f);
+	player->GetCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(150.f);
 
 	auto ghost_spawns = ls::findTiles(ls::ENEMY);
 	for (auto& g : ghosts) {
 		g->setPosition(ls::getTilePosition(ghost_spawns[rand() % GHOST_COUNT]));
-		//g->getCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(100.f);
+		g->GetCompatibleComponent<ActorMovementComponent>()[0]->setSpeed(100.f);
 	}
 }
 

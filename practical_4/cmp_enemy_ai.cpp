@@ -32,6 +32,6 @@ void EnemyAIComponent::update(float dt) {
 		displacement.y = displacement.y / l;
 	}
 
-	move((float)dt * displacement * _speed);
+	//move((float)dt * displacement * _speed);
 
 }
