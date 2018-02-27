@@ -141,9 +141,9 @@ LevelSystem::TILE LevelSystem::getTileAt(Vector2f v) {
 
 std::vector<sf::Vector2ul> LevelSystem::findTiles(LevelSystem::TILE tile) {
 	std::vector<sf::Vector2ul> ret;
-	for (int i = 0; i < sizeof(&_tiles); i++) {
+	for (int i = 0; i < _width * _height; i++) {
 		if (_tiles[i] == tile) {
-			ret.push_back(Vector2ul(i % _width, (_width / (i + 1)) - 1));
+			ret.push_back(Vector2ul(i % _width, i / _width));
 		}
 	}
 	if (ret.size() == 0) {
