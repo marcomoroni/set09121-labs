@@ -39,9 +39,18 @@ void MenuScene::load() {
 }
 
 void GameScene::update(float dt) {
+	// Return to main menu
 	if (Keyboard::isKeyPressed(Keyboard::Tab)) {
 		activeScene = menuScene;
 	}
+
+	// Reset game when ghost hists pacman
+	for (auto& g : ghosts) {
+		if (length(g->getPosition() - player->getPosition()) < 30.f) {
+			respawn();
+		}
+	}
+
 	Scene::update(dt);
 }
 
