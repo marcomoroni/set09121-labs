@@ -11,8 +11,8 @@ using namespace std;
 //        Usually Sam uses 1 unit = 1 meter when working on 3D games.
 //        Box2D has a recommended 30 units per 1 pixel that feels realistic.
 
-const int gameWidth = 800;
-const int gameHeight = 600;
+const int gameWidth = 1000;
+const int gameHeight = 800;
 
 b2World* world;
 const float physics_scale = 30.f; //                                          ?
@@ -95,6 +95,34 @@ void init()
 
 	// Construct a world, which holds and simulates the physics bodies
 	world = new b2World(gravity);
+
+	// Wall dimentions
+	Vector2f walls[] = {
+		// Top (position, size)
+		Vector2f(gameWidth * .5f, 5.f), Vector2f(gameWidth, 10.f),
+		// Bottom
+		Vector2f(gameWidth * .5f, gameHeight - 5.f), Vector2f(gameWidth, 10.f),
+		// Left
+		Vector2f(5.f, gameHeight * .5f), Vector2f(10.f, gameHeight),
+		// Right
+		Vector2f(gameWidth - 5.f, gameHeight * .5f), Vector2f(10.f, gameHeight)
+	};
+
+	// Build walls
+	for (int i = 0; i < 7; i += 2)
+	{
+		// Create SFML shapes for each wall
+		auto s = new RectangleShape();
+		s->setPosition(walls[i]);
+		s->setSize(walls[i + 1]);
+		s->setOrigin(Vector2f(walls[i + 1].x / 2, walls[i + 1].y / 2));
+		s->setFillColor(Color::White);
+		sprites.push_back(s);
+
+		// Create a dynamic physics body for the box
+		auto b = CreatePhysicsBox(*world, false, *s);
+		bodies.push_back(b);
+	}
 
 	// Create boxes
 	for (int i = 1; i < 11; ++i)
