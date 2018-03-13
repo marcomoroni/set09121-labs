@@ -11,12 +11,14 @@ using namespace std;
 //        Usually Sam uses 1 unit = 1 meter when working on 3D games.
 //        Box2D has a recommended 30 units per 1 pixel that feels realistic.
 
-float gameWidth = 800.f;
-float gameHeight = 600.f;
+const int gameWidth = 800;
+const int gameHeight = 600;
 
 b2World* world;
-float physics_scale = 30.f; //                                                ?
-float physics_scale_inv = 1 / physics_scale;
+const float physics_scale = 30.f; //                                          ?
+const float physics_scale_inv = 1 / physics_scale;
+const int velocityIterations = 2; //                                          ?
+const int positionIterations = 2; //                                          ?
 
 vector<b2Body*> bodies;
 vector<RectangleShape*> sprites;
@@ -113,7 +115,61 @@ void init()
 	}
 }
 
-int main() {
+
+
+void Update(RenderWindow &window)
+{
+	// Reset clock, recalculate deltatime
+	static Clock clock;
+	float dt = clock.restart().asSeconds();
+
+	// Check and consume events
+	Event event;
+	while (window.pollEvent(event)) {
+		if (event.type == Event::Closed) {
+			window.close();
+			return;
+		}
+	}
+
+	// Quit via ESC Key
+	if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+		window.close();
+	}
+
+	// Step physics world by dt
+	world->Step(dt, velocityIterations, positionIterations);
+
+	for (int i = 0; i < bodies.size(); ++i)
+	{
+		// Sync sprites to physics position
+		sprites[i]->setPosition(
+			invert_height(bv2_to_sv2(bodies[i]->GetPosition()))
+		);
+		// Sync sprites to physics rotation
+		sprites[i]->setRotation((180 / b2_pi) * bodies[i]->GetAngle());
+	}
+}
+
+
+
+void Render(RenderWindow &window)
+{
+	for (auto s : sprites) window.draw(*s);
+}
+
+
+
+int main()
+{
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "PHYSICS");
 	init();
+	while (window.isOpen())
+	{
+		window.clear();
+		Update(window);
+		Render(window);
+		window.display();
+	}
 	return 0;
 }
