@@ -1,0 +1,1 @@
+Practical 6 is [here](https://github.com/marcomoroni/set09121-labs-6).
